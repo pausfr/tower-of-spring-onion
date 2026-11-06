@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>미쿠의 대파탑</title>
+<style>
+:root{--bg1:#fff6d6;--bg2:#d9f0c0;--ink:#234a2b;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg1:#1c2a22;--bg2:#12201a;--ink:#e6f5df;color-scheme:dark}}
+:root[data-theme="dark"]{--bg1:#1c2a22;--bg2:#12201a;--ink:#e6f5df;color-scheme:dark}
+html,body{height:100%;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:linear-gradient(var(--bg1),var(--bg2));color:var(--ink);font-family:"Noto Sans KR","Apple SD Gothic Neo","Malgun Gothic",sans-serif;display:grid;place-items:center;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+#wrap{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:12px;width:min(100%,1000px);padding:10px;box-sizing:border-box}
+.slot{justify-self:center;width:100%;max-width:240px;border:3px dashed rgba(63,157,59,.5);border-radius:18px;background:rgba(63,157,59,.1);display:flex;align-items:flex-end;justify-content:center;padding-bottom:14px;box-sizing:border-box;font-size:13px;opacity:.85;overflow:hidden}
+@media(max-width:560px){.slot span{display:none}}
+.stage{position:relative;height:min(calc(100dvh - 20px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)),640px);aspect-ratio:9/16;border-radius:18px;overflow:hidden;box-shadow:0 8px 30px rgba(0,0,0,.25)}
+canvas{width:100%;height:100%;display:block}
+.hud{position:absolute;top:8px;left:0;right:0;display:flex;justify-content:space-between;padding:0 12px;font-weight:700;font-size:15px;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.6);pointer-events:none}
+.hint{position:absolute;left:0;right:0;bottom:14px;text-align:center;font-size:17px;font-weight:700;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.7);pointer-events:none}
+#ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:24px;text-align:center;background:rgba(10,30,15,.62);color:#fff}
+#ov.hide{display:none}
+#ov p{font-size:22px;line-height:1.5;margin:0;font-weight:700;word-break:keep-all}
+#ov p.big{font-size:96px;animation:pop .9s ease-out}
+@keyframes pop{from{transform:scale(1.8);opacity:0}to{transform:scale(1);opacity:1}}
+button{font:inherit;font-weight:700;font-size:18px;padding:10px 26px;border:0;border-radius:999px;background:#7ddc5f;color:#143a14;cursor:pointer;box-shadow:0 4px 0 #3f9d3b}
+button.sub{background:#fff;color:#234;box-shadow:0 4px 0 #bbb}
+button:active{transform:translateY(2px)}
+#msg{position:absolute;left:0;right:0;top:30%;text-align:center;font-size:42px;font-weight:900;color:#fff;text-shadow:0 3px 0 #2e8b3d,0 0 14px rgba(0,0,0,.4);pointer-events:none;opacity:0}
+#msg.go{animation:toast 1.4s ease-out}
+@keyframes toast{0%{opacity:0;transform:scale(.5)}15%{opacity:1;transform:scale(1.15)}30%{transform:scale(1)}80%{opacity:1}100%{opacity:0}}
+</style></head><body>
+<div id="wrap">
+  <div class="slot"><span>캐릭터 자리</span></div>
+  <div class="stage">
+    <canvas id="cv" width="720" height="1280"></canvas>
+    <div class="hud"><span id="fl">0층</span><span id="sp"></span><span id="bs"></span></div>
+    <div id="msg"></div><div id="ht" class="hint"></div><div id="ov"></div>
+  </div>
+  <div class="slot"><span>캐릭터 자리</span></div>
+</div>
+<script type="module" src="/src/main.ts"></script>
+</body></html>
